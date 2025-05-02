@@ -6,7 +6,7 @@ const BreadGallery = () => {
   const [breads, setBreads] = useState<BreadItem[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/bread")
+    fetch("https://bread-u1af.onrender.com/api/bread")
       .then((res) => res.json())
       .then((data: BreadItem[]) => setBreads(data));
   }, []);
@@ -17,7 +17,7 @@ const BreadGallery = () => {
         <GalleryItem key={i}>
           <ImageWrapper>
             <GalleryImage
-              src={`http://localhost:8000/images/${bread.filename}`}
+              src={`https://bread-u1af.onrender.com/images/${bread.filename}`}
               alt={bread.description}
               loading="lazy"
             />
