@@ -6,6 +6,11 @@ import os
 
 app = FastAPI()
 
+# Root route
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to my mini bread API"}
+
 # Allow frontend to access backend
 app.add_middleware(
     CORSMiddleware,
