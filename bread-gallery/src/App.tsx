@@ -1,21 +1,23 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import "./App.css";
 import BreadGallery from "./BreadGallery";
-import avatar from "./assets/avatar.webp";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { BreadAboutSection, CodingAboutSection } from "./AboutSection";
+import { useTopic } from "./hooks";
 
 const GlobalStyle = createGlobalStyle`
   body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    background-color: #dac4a7;
-    color: #2f2f2f;
+    background-color: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
     font-family: 'VT323', monospace;
   }
 
   h1, h2 {
     font-family: 'Press Start 2P', monospace;
-    color: #8a4b2a;
+    color: ${(props) => props.theme.accent};
     font-size: 1.5rem;
     margin-bottom: 1rem;
 
@@ -31,71 +33,46 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const topic = useTopic();
+  const isCodingPage = topic === "coding";
+
+  const theme = isCodingPage
+    ? {
+        background: "#184766",
+        text: "#f5f7fa",
+        accent: "#4FDBCA",
+      }
+    : {
+        background: "#dac4a7",
+        text: "#2f2f2f",
+        accent: "#8a4b2a",
+      };
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <div>
-        <h1>🥖 Bread Gallery 🍞</h1>
-
-        <AboutSection />
-
-        <BreadGallery />
-      </div>
-    </>
+      <Routes>
+        <Route path="/" element={<Navigate to="/bread-gallery" replace />} />
+        <Route path="/bread-gallery" element={<BreadPage />} />
+        <Route path="/coding" element={<CodingPage />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 
+const BreadPage = () => (
+  <div>
+    <h1>🥖 Bread Gallery 🍞</h1>
+    <BreadAboutSection />
+    <BreadGallery />
+  </div>
+);
+
+const CodingPage = () => (
+  <div>
+    <h1>💻 {"Snack -> Stack"} 💻</h1>
+    <CodingAboutSection />
+  </div>
+);
+
 export default App;
-
-const AboutSection = () => {
-  return (
-    <Wrapper>
-      <Avatar src={avatar} alt="Cartoon baker avatar" />
-      <Text>
-        <h2>About Me</h2>
-        <p>
-          Hi, I'm Dan. Sometimes I bake bread... and sometimes I take pictures
-          of my bread... and sometimes, I make a website to show off my
-          pictures. This is one of those times.
-        </p>
-      </Text>
-    </Wrapper>
-  );
-};
-
-const Wrapper = styled.section`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-
-  @media (max-width: 640px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const Avatar = styled.img`
-  width: 150px;
-  height: auto;
-  border-radius: 8px;
-`;
-
-const Text = styled.div`
-  max-width: 600px;
-
-  h2 {
-    margin-bottom: 0.5rem;
-    font-family: "Press Start 2P", monospace;
-    font-size: 1.25rem;
-  }
-
-  p {
-    font-family: "VT323", monospace;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    text-align: justify;
-  }
-`;
