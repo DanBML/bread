@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { BreadItem } from "./types";
+import { BreadItem } from "../../types";
 import styled from "styled-components";
+import config from "../../config";
 
 const BreadGallery = () => {
   const [breads, setBreads] = useState<BreadItem[]>([]);
 
   useEffect(() => {
-    fetch("https://bread-u1af.onrender.com/api/bread")
+    fetch(`${config.apiUrl}/api/bread`)
       .then((res) => res.json())
       .then((data: BreadItem[]) => setBreads(data));
   }, []);
@@ -17,7 +18,7 @@ const BreadGallery = () => {
         <GalleryItem key={i}>
           <ImageWrapper>
             <GalleryImage
-              src={`https://bread-u1af.onrender.com/images/${bread.filename}`}
+              src={`${config.apiUrl}/images/${bread.filename}`}
               alt={bread.description}
               loading="lazy"
             />

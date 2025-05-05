@@ -1,10 +1,7 @@
 import styled from "styled-components";
-import "./App.css";
-import avatarBaker from "./assets/avatar.webp";
-import avatarCoder from "./assets/avatar-coding.webp";
+import avatarBaker from "../../assets/avatar.webp";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FaGithub } from "react-icons/fa";
 
 export const BreadAboutSection = () => {
   const [wiggling, setWiggling] = useState(false);
@@ -43,38 +40,6 @@ export const BreadAboutSection = () => {
     </Wrapper>
   );
 };
-
-export const CodingAboutSection = () => {
-  return (
-    <Wrapper>
-      <Link to="/bread-gallery">
-        <Avatar src={avatarCoder} alt={"Cartoon coder avatar"} />
-      </Link>
-      <Text>
-        <h2>About Me</h2>
-        <p>
-          .... I also like to code. In fact, I made this SPA using React and
-          Typescript with a small Python backend. Both deployed using Render.
-        </p>
-        <p>
-          {" "}
-          Here's the repo: <GithubRepoLink />
-        </p>
-        <p>... serious font incoming ...</p>
-      </Text>
-    </Wrapper>
-  );
-};
-
-const GithubRepoLink = () => (
-  <a
-    href="https://github.com/DanBML/bread"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <FaGithub size={40} style={{ marginRight: "0.5rem" }} />
-  </a>
-);
 
 const Wrapper = styled.section`
   display: flex;
