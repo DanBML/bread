@@ -76,6 +76,18 @@ export const CodingText = () => {
           that picture. (I.e. How is success measured in this role?)
         </Paragraph>
       </Section>
+      <Section>
+        <Title>Portfolio Presentation</Title>
+        <iframe
+          src="https://docs.google.com/presentation/d/e/2PACX-1vTWrvxNl_vw8cw1iBgmmyy2_JSDuXJLAO87lkprz2yJfi33qs9qsU6W4CY19ZdJlqSo9gk1d_EDXF4t/pubembed?start=false&loop=false&delayms=3000"
+          frameborder="0"
+          width="960"
+          height="569"
+          allowfullscreen="true"
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+        ></iframe>
+      </Section>
     </>
   );
 };
