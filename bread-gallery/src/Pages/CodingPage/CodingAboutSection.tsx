@@ -19,7 +19,6 @@ export const CodingAboutSection = () => {
           {" "}
           Here's the repo: <GithubRepoLink />
         </p>
-        <p>... serious font incoming ...</p>
       </Text>
     </Wrapper>
   );
